@@ -26,17 +26,14 @@ class Install extends CI_Controller {
         )');
 
 
-        // Tb Profile        
-
-
-      // Database installation success
-
-      Successfully inserted database 
-
+      echo "Successfully inserted database ";
     }
 
 }
 
 /* End of file Install.php */
+
+// Tb Profile
+
 
 ?>

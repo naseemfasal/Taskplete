@@ -6,7 +6,7 @@ class Page extends CI_Controller {
 
     function __construct() {
         parent::__construct();
-        //$this->load->model('Login_model', '', TRUE);
+        
     }
 
     public function index()
@@ -41,10 +41,26 @@ class Page extends CI_Controller {
         $this->form_validation->set_rules('email', 'Email', 'required');
         $this->form_validation->set_rules('password','Password','required');
         
+        // Calling Models 
+        $this->load->model('Login_model', '', TRUE);
+
         if ($this->form_validation->run() == TRUE) {
-            echo "ok";
+            
+            if($this->Login_model->add_user()){
+
+                $response=array('status'=>'SUCCESS');
+                echo json_encode($response);
+            }
+            else{
+
+                $response=array('status'=>'DB_SERV_ERROR');
+                echo json_encode($response);
+            }
+
         } else {
-            echo "false";
+
+                $response=array('status'=>'VALIDATION_ERROR');
+                echo json_encode($response);            
         }
         
          

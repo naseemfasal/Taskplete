@@ -1,6 +1,8 @@
 <?php
 
 
+// TB Users
+
 $this->db->query('CREATE TABLE tb_users
 (
 user_id INT NOT NULL AUTO_INCREMENT,
@@ -17,4 +19,5 @@ is_active TINYINT,
 )');
 
 
+// Tb Profile
 ?>

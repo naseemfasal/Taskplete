@@ -8,6 +8,9 @@ class Login_Model extends CI_Model {
     {
         parent::__construct();
         $this->load->database();
+        
+        $this->load->helper('string');
+        
     }
 
     public function add_user()
@@ -23,7 +26,7 @@ class Login_Model extends CI_Model {
 
         $data = array('email'=>$username,'password'=>$password,'activation_code'=>$activation_code,'forgotten_password_code'=>$forgotten_password_code,'created_on'=>$created_on,'is_active'=>$is_active);
         
-        $flag = $this->db->insert('tb_user', $data);
+        $flag = $this->db->insert('tb_users', $data);
 
         if($flag){
             return TRUE;
@@ -46,7 +49,7 @@ class Login_Model extends CI_Model {
 
         $data = array('email'=>$username,'password'=>$password,'activation_code'=>$activation_code,'forgotten_password_code'=>$forgotten_password_code,'created_on'=>$created_on,'is_active'=>$is_active);
         
-        $flag = $this->db->insert('tb_user', $data);
+        $flag = $this->db->insert('tb_users', $data);
 
         if($flag){
             return TRUE;
@@ -71,7 +74,7 @@ class Login_Model extends CI_Model {
         
         $this->db->limit('1');
         
-        $result = $this->db->get('tb_user');
+        $result = $this->db->get('tb_users');
         
         $count = $result->num_rows();
         
@@ -81,7 +84,7 @@ class Login_Model extends CI_Model {
             
             $this->db->where('email', $email);
             
-            $flag = $this->db->update('tb_user', $data);
+            $flag = $this->db->update('tb_users', $data);
             if($flag){
                 return TRUE;
             }
@@ -100,7 +103,7 @@ class Login_Model extends CI_Model {
     {
         
         $this->db->select('*');
-        $this->db->from('tb_user');
+        $this->db->from('tb_users');
         $this->db->where('email', $username);
         $this->db->where('password', $password);
         
@@ -123,16 +126,16 @@ class Login_Model extends CI_Model {
         $email = $this->input->post('email');
         
         $this->db->select('*');
-        $this->db->from('tb_user');
+        $this->db->from('tb_users');
         $this->db->where('email', $email);
         $result = $this->db->get();
 
-        $forgotten_password_code = date('Y-m-d H:i:s')
-        $data = array('forgotten_password_time'=>$forgotten_password_time)
+        $forgotten_password_code = date('Y-m-d H:i:s');
+        $data = array('forgotten_password_time'=>$forgotten_password_time);
         
         $this->db->where('email', $email);
         
-        $this->db->update('tb_user', $data);
+        $this->db->update('tb_users', $data);
 
         return  $result;
     }
@@ -143,11 +146,10 @@ class Login_Model extends CI_Model {
         $forgotten_password_code = $this->input->post('forgotten_password_code');
         $email = $this->input->post('email');
         $password = $this->input->post('password');
-        
-        
+    
         
         $this->db->select('*');
-        $this->db->from('tb_user');
+        $this->db->from('tb_users');
         $this->db->where('email', $username);
         $this->db->where('forgotten_password_code', $forgotten_password_code);
         
@@ -159,8 +161,12 @@ class Login_Model extends CI_Model {
         {
             $forgotten_password_code = md5(random_string('alnum', 20));            
             data = array('password'=>$password,'forgotten_password_code'=>$forgotten_password_code);
+            $forgotten_password_code = md5(rand(20));            
+            $data = array('password'=>$password,'forgotten_password_code' => $forgotten_password_code);
+            $forgotten_password_code = md5(random_string('alnum', 16));            
+            $data = array('password'=>$password,'forgotten_password_code'=>$forgotten_password_code);
             $this->db->where('email', $email);
-            $this->db->update('tb_user', $data);
+            $this->db->update('tb_users', $data);
             return TRUE;
         }
         else{

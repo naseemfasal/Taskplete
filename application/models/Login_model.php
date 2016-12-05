@@ -160,7 +160,7 @@ class Login_Model extends CI_Model {
         if($result->num_rows() > 0)
         {
             $forgotten_password_code = md5(random_string('alnum', 20));            
-            data = array('password'=>$password,'forgotten_password_code'=>$forgotten_password_code);
+            $data = array('password'=>$password,'forgotten_password_code'=>$forgotten_password_code);
             $forgotten_password_code = md5(rand(20));            
             $data = array('password'=>$password,'forgotten_password_code' => $forgotten_password_code);
             $forgotten_password_code = md5(random_string('alnum', 16));            

@@ -8,6 +8,9 @@ class Login_Model extends CI_Model {
     {
         parent::__construct();
         $this->load->database();
+        
+        $this->load->helper('string');
+        
     }
 
     public function add_user()
@@ -15,8 +18,8 @@ class Login_Model extends CI_Model {
         $username = $this->input->post('email');
         $password = md5($this->input->post('password'));
         
-        $activation_code = md5(random_string('alnum', 16));
-        $forgotten_password_code = md5(random_string('alnum', 16));
+        $activation_code = md5(random_string('alnum', 20));
+        $forgotten_password_code = md5(random_string('alnum', 20));
         //$forgotten_password_time = date('Y-m-d H:i:s');
         $created_on = date('Y-m-d H:i:s');
         $is_active = 0;
@@ -156,6 +159,8 @@ class Login_Model extends CI_Model {
 
         if($result->num_rows() > 0)
         {
+            $forgotten_password_code = md5(random_string('alnum', 20));            
+            data = array('password'=>$password,'forgotten_password_code'=>$forgotten_password_code);
             $forgotten_password_code = md5(rand(20));            
             $data = array('password'=>$password,'forgotten_password_code' => $forgotten_password_code);
             $forgotten_password_code = md5(random_string('alnum', 16));            

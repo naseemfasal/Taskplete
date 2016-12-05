@@ -6,6 +6,7 @@ class Login_Model extends CI_Model {
 
     public function __construct()
     {
+        parent::__construct();
         $this->load->database();
     }
 
@@ -14,8 +15,8 @@ class Login_Model extends CI_Model {
         $username = $this->input->post('email');
         $password = md5($this->input->post('password'));
         
-        $activation_code = md5(rand(20));
-        $forgotten_password_code = md5(rand(20));
+        $activation_code = md5(random_string('alnum', 16));
+        $forgotten_password_code = md5(random_string('alnum', 16));
         //$forgotten_password_time = date('Y-m-d H:i:s');
         $created_on = date('Y-m-d H:i:s');
         $is_active = 0;
@@ -157,6 +158,8 @@ class Login_Model extends CI_Model {
         {
             $forgotten_password_code = md5(rand(20));            
             $data = array('password'=>$password,'forgotten_password_code' => $forgotten_password_code);
+            $forgotten_password_code = md5(random_string('alnum', 16));            
+            $data = array('password'=>$password,'forgotten_password_code'=>$forgotten_password_code);
             $this->db->where('email', $email);
             $this->db->update('tb_users', $data);
             return TRUE;

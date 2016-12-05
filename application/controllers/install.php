@@ -16,5 +16,7 @@ created_on DATETIME,
 is_active TINYINT,
 )');
 
+exit();
+
 
 ?>

@@ -97,6 +97,7 @@ class Page extends CI_Controller {
         //query the database
         $this->load->model('Login_model');
         $result = $this->Login_model->check_user($email, $password);
+        echo $result;
 
         if ($result) {
             $sess_array = array();

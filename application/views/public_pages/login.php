@@ -10,7 +10,7 @@
     <body>
         <div class="container">
             <?php echo 
-            form_open('page/login_authentication', 'login_form','');
+            form_open('page/login_authentication', array('id'=>'login_form'));
             ?>
 
                 <label for="email">Email</label>
@@ -25,7 +25,7 @@
 
     <script src="<?php echo (JS);?>app.min.js" />
    <script>
-       ajaxSend('login_form','page/login_authentication');
+       ajaxSend();
    </script>
     </body>
 </html>

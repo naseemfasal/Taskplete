@@ -78,22 +78,25 @@ class Page extends CI_Controller {
         $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_database');   
         if ($this->form_validation->run() == FALSE) {
 
-
+            $status = array('status'=>'TRUE');
+            echo json_encode($status);
         }
         else{
-            
+            $status = array('status'=>'FALSE');
+            echo json_encode($status);            
         }
 
             
 
     }       
 
-    function check_database($password) {
+    function check_database() {
         //Field validation succeeded.  Validate against database
         $email = $this->input->post('email');
-
+        $password = $this->input->post('password');
         //query the database
-        $result = $this->get_data->login($email, $password);
+        $this->load->model('Login_model');
+        $result = $this->Login_model->check_user($email, $password);
 
 
         if ($result) {
@@ -102,8 +105,8 @@ class Page extends CI_Controller {
                 $sess_array = array(
                     'user_id' => $row['user_id'],
                     'email' => $row['email'],
-                    'user_role' => $row['user_role'],
-                    'first_name' => $row['first_name']
+                    'is_active' => $row['is_active'],
+                    'profile_id'=> $row['profile_id']
                 );
 
                 //$this->session->set_userdata('logged_in', $sess_array);

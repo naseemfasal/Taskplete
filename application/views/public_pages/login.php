@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="<?php echo (CSS);?>bootstrap.css" />
-        <link href="<?php echo (CSS);?>css/style.css" rel="stylesheet">
+        <link href="<?php echo (CSS);?>style.css" rel="stylesheet">
     </head>
     <body>
         <div class="container">
@@ -23,7 +23,7 @@
         
         </div>
 
-
+    <script src="<?php echo (JS);?>app.min.js" />
    
     </body>
 </html>

@@ -11,4 +11,4 @@ class Text extends CI_Controller {
 
 }
 
-/* End of file Text.php  sadsa*/
+/* End of file Text.php  Ok*/

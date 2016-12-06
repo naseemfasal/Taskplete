@@ -86,5 +86,10 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 
 
-// define('URL','http://localhost/taskplete');
-// define('CSS',(CSS).'http://localhost/taskplete');
+
+/*  CSS ,js and images */
+
+define('URL','https://localhost/taskplete/');
+define('IMG',URL.'assets/front_end/img/');
+define('CSS',URL.'assets/front_end/css/');
+define('JS',URL.'assets/front_end/js/');

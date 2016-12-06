@@ -24,7 +24,9 @@
         </div>
 
     <script src="<?php echo (JS);?>app.min.js" />
-   
+   <script>
+       ajaxSend('login_form','page/login_authentication');
+   </script>
     </body>
 </html>
 

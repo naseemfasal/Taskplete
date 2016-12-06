@@ -76,13 +76,13 @@ class Page extends CI_Controller {
 
         $this->form_validation->set_rules('email', 'Email', 'trim|required|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_database');   
-        if ($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == TRUE) {
 
-            $status = array('status'=>'TRUE');
+            $status = array('status'=>'LOGIN_SUCCESS');
             echo json_encode($status);
         }
         else{
-            $status = array('status'=>'FALSE');
+            $status = array('status'=>'LOGIN_FAIL');
             echo json_encode($status);            
         }
 
@@ -97,7 +97,6 @@ class Page extends CI_Controller {
         //query the database
         $this->load->model('Login_model');
         $result = $this->Login_model->check_user($email, $password);
-
 
         if ($result) {
             $sess_array = array();
